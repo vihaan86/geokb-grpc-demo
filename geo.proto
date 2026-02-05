@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package geo;
+
+service GeoLLMService {
+  rpc Ask (GeoRequest) returns (GeoResponse);
+}
+
+message GeoRequest {
+  string question = 1;
+  int32 top_k = 2;          // optional; used for list-style answers
+  bool include_sources = 3; // include which CSV rows were used
+}
+
+message GeoResponse {
+  string answer = 1;
+  repeated string sources = 2; // e.g., "France,Paris,Europe"
+}
